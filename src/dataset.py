@@ -178,7 +178,7 @@ def get_rating_matrix(data_name, seq_dic, max_item):
 
 def get_user_seqs_and_max_item(data_file):
     lines = open(data_file).readlines()
-    lines = lines[1:]
+    # lines = lines[1:]
     user_seq = []
     item_set = set()
     for line in lines:

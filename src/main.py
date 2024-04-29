@@ -41,6 +41,8 @@ def main():
     test_dataloader = get_dataloder(args, test_seq_dic, 'test')
 
     logger.info(str(args))
+    logger.info(args.data_file)
+    logger.info(str(args.train_seq_dic))
     model = MODEL_DICT[args.model_type.lower()](args=args)
     logger.info(model)
     trainer = Trainer(model, train_dataloader, eval_dataloader, test_dataloader, args, logger)
