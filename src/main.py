@@ -24,7 +24,7 @@ def main():
 
     args.data_file = args.data_dir + 'train_' + args.data_name + '.txt'
     train_seq_dic, train_max_item, num_users = get_seq_dic(args)
-    args.item_size = max_item + 1
+    args.item_size = train_max_item + 1
     args.num_users = num_users + 1
     train_dataloader = get_dataloder(args, train_seq_dic, 'train')
 
