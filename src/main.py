@@ -19,20 +19,33 @@ def main():
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
 
-    seq_dic, max_item, num_users = get_seq_dic(args)
-    args.item_size = max_item + 1
-    args.num_users = num_users + 1
-
     args.checkpoint_path = os.path.join(args.output_dir, args.train_name + '.pt')
     args.same_target_path = os.path.join(args.data_dir, args.data_name+'_same_target.npy')
-    train_dataloader, eval_dataloader, test_dataloader = get_dataloder(args,seq_dic)
+
+    args.data_file = args.data_dir + 'train_' + args.data_name + '.txt'
+    train_seq_dic, train_max_item, num_users = get_seq_dic(args)
+    args.item_size = max_item + 1
+    args.num_users = num_users + 1
+    train_dataloader = get_dataloder(args, train_seq_dic, 'train')
+
+    args.data_file = args.data_dir + 'val_' + args.data_name + '.txt'
+    val_seq_dic, max_item, num_users = get_seq_dic(args)
+    args.item_size = max_item + 1
+    args.num_users = num_users + 1
+    eval_dataloader = get_dataloder(args, val_seq_dic, 'val')
+
+    args.data_file = args.data_dir + 'test_' + args.data_name + '.txt'
+    test_seq_dic, max_item, num_users = get_seq_dic(args)
+    args.item_size = max_item + 1
+    args.num_users = num_users + 1
+    test_dataloader = get_dataloder(args, test_seq_dic, 'test')
 
     logger.info(str(args))
     model = MODEL_DICT[args.model_type.lower()](args=args)
     logger.info(model)
     trainer = Trainer(model, train_dataloader, eval_dataloader, test_dataloader, args, logger)
 
-    args.valid_rating_matrix, args.test_rating_matrix = get_rating_matrix(args.data_name, seq_dic, max_item)
+    args.valid_rating_matrix, args.test_rating_matrix = get_rating_matrix(args.data_name, val_seq_dic, train_max_item), get_rating_matrix(args.data_name, test_seq_dic, train_max_item)
 
     if args.do_eval:
         if args.load_model is None:

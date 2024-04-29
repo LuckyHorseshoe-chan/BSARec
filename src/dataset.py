@@ -18,12 +18,8 @@ class RecDataset(Dataset):
         if self.data_type=='train':
             for user, seq in enumerate(user_seq):
                 input_ids = seq[-(self.max_len + 2):-2]
-                for i in range(len(input_ids)):
-                    self.user_seq.append(input_ids[:i + 1])
-                    self.user_ids.append(user)
-        elif self.data_type=='valid':
-            for sequence in user_seq:
-                self.user_seq.append(sequence[:-1])
+                self.user_seq.append(input_ids)
+                self.user_ids.append(user)
         else:
             self.user_seq = user_seq
 
@@ -162,10 +158,23 @@ def generate_rating_matrix_test(user_seq, num_users, num_items):
 def get_rating_matrix(data_name, seq_dic, max_item):
     
     num_items = max_item + 1
-    valid_rating_matrix = generate_rating_matrix_valid(seq_dic['user_seq'], seq_dic['num_users'], num_items)
-    test_rating_matrix = generate_rating_matrix_test(seq_dic['user_seq'], seq_dic['num_users'], num_items)
+    row = []
+    col = []
+    data = []
+    for user_id, item_list in enumerate(seq_dic['user_seq']):
+        for item in item_list: #
+            row.append(user_id)
+            col.append(item)
+            data.append(1)
 
-    return valid_rating_matrix, test_rating_matrix
+    row = np.array(row)
+    col = np.array(col)
+    data = np.array(data)
+    rating_matrix = csr_matrix((data, (row, col)), shape=(seq_dic['num_users'], num_items))
+    # valid_rating_matrix = generate_rating_matrix_valid(seq_dic['user_seq'], seq_dic['num_users'], num_items)
+    # test_rating_matrix = generate_rating_matrix_test(seq_dic['user_seq'], seq_dic['num_users'], num_items)
+
+    return rating_matrix
 
 def get_user_seqs_and_max_item(data_file):
     lines = open(data_file).readlines()
@@ -197,25 +206,18 @@ def get_user_seqs(data_file):
     return user_seq, max_item, num_users
 
 def get_seq_dic(args):
-
-    args.data_file = args.data_dir + args.data_name + '.txt'
     user_seq, max_item, num_users = get_user_seqs(args.data_file)
     seq_dic = {'user_seq':user_seq, 'num_users':num_users }
 
     return seq_dic, max_item, num_users
 
-def get_dataloder(args,seq_dic):
+def get_dataloder(args, seq_dic, data_type):
 
-    train_dataset = RecDataset(args, seq_dic['user_seq'], data_type='train')
-    train_sampler = RandomSampler(train_dataset)
-    train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.batch_size, num_workers=args.num_workers)
+    dataset = RecDataset(args, seq_dic['user_seq'], data_type=data_type)
+    if data_type == 'train':
+        sampler = RandomSampler(dataset)
+    else:
+        sampler = SequentialSampler(dataset)
+    dataloader = DataLoader(dataset, sampler=sampler, batch_size=args.batch_size, num_workers=args.num_workers)
 
-    eval_dataset = RecDataset(args, seq_dic['user_seq'], data_type='valid')
-    eval_sampler = SequentialSampler(eval_dataset)
-    eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.batch_size, num_workers=args.num_workers)
-
-    test_dataset = RecDataset(args, seq_dic['user_seq'], data_type='test')
-    test_sampler = SequentialSampler(test_dataset)
-    test_dataloader = DataLoader(test_dataset, sampler=test_sampler, batch_size=args.batch_size, num_workers=args.num_workers)
-
-    return train_dataloader, eval_dataloader, test_dataloader
+    return dataloader
