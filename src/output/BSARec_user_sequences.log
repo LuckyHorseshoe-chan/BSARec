@@ -1,0 +1,172 @@
+2024-04-30 07:43:57,985 - train
+2024-04-30 07:44:36,795 - val
+2024-04-30 07:45:01,814 - test
+2024-04-30 07:45:01,827 - Namespace(data_dir='./data/', output_dir='output/', data_name='user_sequences', do_eval=False, load_model=None, train_name='BSARec_user_sequences', num_items=10, num_users=508697, lr=0.0005, batch_size=256, epochs=2, no_cuda=False, log_freq=1, patience=10, num_workers=4, seed=42, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, gpu_id='0', variance=5, model_type='BSARec', max_seq_length=50, hidden_size=64, num_hidden_layers=2, hidden_act='gelu', num_attention_heads=1, attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, initializer_range=0.02, c=5, alpha=0.7, cuda_condition=False, checkpoint_path='output/BSARec_user_sequences.pt', same_target_path='./data/user_sequences_same_target.npy', data_file='./data/test_user_sequences.txt', item_size=5026)
+2024-04-30 07:45:01,835 - ./data/test_user_sequences.txt
+2024-04-30 07:45:02,015 - BSARecModel(
+  (item_embeddings): Embedding(5026, 64, padding_idx=0)
+  (position_embeddings): Embedding(50, 64)
+  (LayerNorm): LayerNorm()
+  (dropout): Dropout(p=0.5, inplace=False)
+  (item_encoder): BSARecEncoder(
+    (blocks): ModuleList(
+      (0-1): 2 x BSARecBlock(
+        (layer): BSARecLayer(
+          (filter_layer): FrequencyLayer(
+            (out_dropout): Dropout(p=0.5, inplace=False)
+            (LayerNorm): LayerNorm()
+          )
+          (attention_layer): MultiHeadAttention(
+            (query): Linear(in_features=64, out_features=64, bias=True)
+            (key): Linear(in_features=64, out_features=64, bias=True)
+            (value): Linear(in_features=64, out_features=64, bias=True)
+            (softmax): Softmax(dim=-1)
+            (attn_dropout): Dropout(p=0.5, inplace=False)
+            (dense): Linear(in_features=64, out_features=64, bias=True)
+            (LayerNorm): LayerNorm((64,), eps=1e-12, elementwise_affine=True)
+            (out_dropout): Dropout(p=0.5, inplace=False)
+          )
+        )
+        (feed_forward): FeedForward(
+          (dense_1): Linear(in_features=64, out_features=256, bias=True)
+          (dense_2): Linear(in_features=256, out_features=64, bias=True)
+          (LayerNorm): LayerNorm()
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+      )
+    )
+  )
+)
+2024-04-30 07:45:05,869 - Total Parameters: 425344
+2024-04-30 07:45:10,602 - training
+2024-04-30 07:45:10,605 - Epoch: 0
+2024-04-30 07:45:10,606 - iteration
+2024-04-30 07:46:13,244 - train
+2024-04-30 07:47:00,473 - val
+2024-04-30 07:47:25,448 - test
+2024-04-30 07:47:25,455 - Namespace(data_dir='./data/', output_dir='output/', data_name='user_sequences', do_eval=False, load_model=None, train_name='BSARec_user_sequences', num_items=10, num_users=508697, lr=0.0005, batch_size=256, epochs=2, no_cuda=False, log_freq=1, patience=10, num_workers=4, seed=42, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, gpu_id='0', variance=5, model_type='BSARec', max_seq_length=50, hidden_size=64, num_hidden_layers=2, hidden_act='gelu', num_attention_heads=1, attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, initializer_range=0.02, c=5, alpha=0.7, cuda_condition=False, checkpoint_path='output/BSARec_user_sequences.pt', same_target_path='./data/user_sequences_same_target.npy', data_file='./data/test_user_sequences.txt', item_size=5026)
+2024-04-30 07:47:25,461 - ./data/test_user_sequences.txt
+2024-04-30 07:47:25,590 - BSARecModel(
+  (item_embeddings): Embedding(5026, 64, padding_idx=0)
+  (position_embeddings): Embedding(50, 64)
+  (LayerNorm): LayerNorm()
+  (dropout): Dropout(p=0.5, inplace=False)
+  (item_encoder): BSARecEncoder(
+    (blocks): ModuleList(
+      (0-1): 2 x BSARecBlock(
+        (layer): BSARecLayer(
+          (filter_layer): FrequencyLayer(
+            (out_dropout): Dropout(p=0.5, inplace=False)
+            (LayerNorm): LayerNorm()
+          )
+          (attention_layer): MultiHeadAttention(
+            (query): Linear(in_features=64, out_features=64, bias=True)
+            (key): Linear(in_features=64, out_features=64, bias=True)
+            (value): Linear(in_features=64, out_features=64, bias=True)
+            (softmax): Softmax(dim=-1)
+            (attn_dropout): Dropout(p=0.5, inplace=False)
+            (dense): Linear(in_features=64, out_features=64, bias=True)
+            (LayerNorm): LayerNorm((64,), eps=1e-12, elementwise_affine=True)
+            (out_dropout): Dropout(p=0.5, inplace=False)
+          )
+        )
+        (feed_forward): FeedForward(
+          (dense_1): Linear(in_features=64, out_features=256, bias=True)
+          (dense_2): Linear(in_features=256, out_features=64, bias=True)
+          (LayerNorm): LayerNorm()
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+      )
+    )
+  )
+)
+2024-04-30 07:47:27,234 - Total Parameters: 425344
+2024-04-30 07:47:30,190 - training
+2024-04-30 07:47:30,191 - Epoch: 0
+2024-04-30 07:47:30,191 - iteration
+2024-04-30 07:52:39,029 - train
+2024-04-30 07:53:14,950 - val
+2024-04-30 07:53:40,071 - test
+2024-04-30 07:53:40,072 - Namespace(data_dir='./data/', output_dir='output/', data_name='user_sequences', do_eval=False, load_model=None, train_name='BSARec_user_sequences', num_items=10, num_users=508697, lr=0.0005, batch_size=256, epochs=2, no_cuda=False, log_freq=1, patience=10, num_workers=4, seed=42, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, gpu_id='0', variance=5, model_type='BSARec', max_seq_length=50, hidden_size=64, num_hidden_layers=2, hidden_act='gelu', num_attention_heads=1, attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, initializer_range=0.02, c=5, alpha=0.7, cuda_condition=False, checkpoint_path='output/BSARec_user_sequences.pt', same_target_path='./data/user_sequences_same_target.npy', data_file='./data/test_user_sequences.txt', item_size=5026)
+2024-04-30 07:53:40,073 - ./data/test_user_sequences.txt
+2024-04-30 07:53:40,085 - BSARecModel(
+  (item_embeddings): Embedding(5026, 64, padding_idx=0)
+  (position_embeddings): Embedding(50, 64)
+  (LayerNorm): LayerNorm()
+  (dropout): Dropout(p=0.5, inplace=False)
+  (item_encoder): BSARecEncoder(
+    (blocks): ModuleList(
+      (0-1): 2 x BSARecBlock(
+        (layer): BSARecLayer(
+          (filter_layer): FrequencyLayer(
+            (out_dropout): Dropout(p=0.5, inplace=False)
+            (LayerNorm): LayerNorm()
+          )
+          (attention_layer): MultiHeadAttention(
+            (query): Linear(in_features=64, out_features=64, bias=True)
+            (key): Linear(in_features=64, out_features=64, bias=True)
+            (value): Linear(in_features=64, out_features=64, bias=True)
+            (softmax): Softmax(dim=-1)
+            (attn_dropout): Dropout(p=0.5, inplace=False)
+            (dense): Linear(in_features=64, out_features=64, bias=True)
+            (LayerNorm): LayerNorm((64,), eps=1e-12, elementwise_affine=True)
+            (out_dropout): Dropout(p=0.5, inplace=False)
+          )
+        )
+        (feed_forward): FeedForward(
+          (dense_1): Linear(in_features=64, out_features=256, bias=True)
+          (dense_2): Linear(in_features=256, out_features=64, bias=True)
+          (LayerNorm): LayerNorm()
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+      )
+    )
+  )
+)
+2024-04-30 07:53:40,972 - Total Parameters: 425344
+2024-04-30 07:53:43,379 - training
+2024-04-30 07:53:43,379 - Epoch: 0
+2024-04-30 07:53:43,380 - iteration
+2024-04-30 07:54:39,071 - train
+2024-04-30 07:55:15,943 - val
+2024-04-30 07:55:41,785 - test
+2024-04-30 07:55:41,785 - Namespace(data_dir='./data/', output_dir='output/', data_name='user_sequences', do_eval=False, load_model=None, train_name='BSARec_user_sequences', num_items=10, num_users=508697, lr=0.0005, batch_size=256, epochs=2, no_cuda=False, log_freq=1, patience=10, num_workers=4, seed=42, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, gpu_id='0', variance=5, model_type='BSARec', max_seq_length=50, hidden_size=64, num_hidden_layers=2, hidden_act='gelu', num_attention_heads=1, attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, initializer_range=0.02, c=5, alpha=0.7, cuda_condition=False, checkpoint_path='output/BSARec_user_sequences.pt', same_target_path='./data/user_sequences_same_target.npy', data_file='./data/test_user_sequences.txt', item_size=5026)
+2024-04-30 07:55:41,787 - ./data/test_user_sequences.txt
+2024-04-30 07:55:41,799 - BSARecModel(
+  (item_embeddings): Embedding(5026, 64, padding_idx=0)
+  (position_embeddings): Embedding(50, 64)
+  (LayerNorm): LayerNorm()
+  (dropout): Dropout(p=0.5, inplace=False)
+  (item_encoder): BSARecEncoder(
+    (blocks): ModuleList(
+      (0-1): 2 x BSARecBlock(
+        (layer): BSARecLayer(
+          (filter_layer): FrequencyLayer(
+            (out_dropout): Dropout(p=0.5, inplace=False)
+            (LayerNorm): LayerNorm()
+          )
+          (attention_layer): MultiHeadAttention(
+            (query): Linear(in_features=64, out_features=64, bias=True)
+            (key): Linear(in_features=64, out_features=64, bias=True)
+            (value): Linear(in_features=64, out_features=64, bias=True)
+            (softmax): Softmax(dim=-1)
+            (attn_dropout): Dropout(p=0.5, inplace=False)
+            (dense): Linear(in_features=64, out_features=64, bias=True)
+            (LayerNorm): LayerNorm((64,), eps=1e-12, elementwise_affine=True)
+            (out_dropout): Dropout(p=0.5, inplace=False)
+          )
+        )
+        (feed_forward): FeedForward(
+          (dense_1): Linear(in_features=64, out_features=256, bias=True)
+          (dense_2): Linear(in_features=256, out_features=64, bias=True)
+          (LayerNorm): LayerNorm()
+          (dropout): Dropout(p=0.5, inplace=False)
+        )
+      )
+    )
+  )
+)
+2024-04-30 07:55:42,660 - Total Parameters: 425344
+2024-04-30 07:55:45,174 - training
+2024-04-30 07:55:45,175 - Epoch: 0
+2024-04-30 07:55:45,175 - iteration

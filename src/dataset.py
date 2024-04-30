@@ -15,13 +15,10 @@ class RecDataset(Dataset):
         self.contrastive_learning = args.model_type.lower() in ['fearec', 'duorec']
         self.data_type = data_type
 
+        self.user_seq = user_seq
         if self.data_type=='train':
-            for user, seq in enumerate(user_seq):
-                input_ids = seq[-(self.max_len + 2):-2]
-                self.user_seq.append(input_ids)
-                self.user_ids.append(user)
-        else:
-            self.user_seq = user_seq
+            self.user_ids = list(range(len(user_seq)))
+
 
         self.test_neg_items = test_neg_items
 
@@ -214,6 +211,7 @@ def get_seq_dic(args):
 def get_dataloder(args, seq_dic, data_type):
 
     dataset = RecDataset(args, seq_dic['user_seq'], data_type=data_type)
+        
     if data_type == 'train':
         sampler = RandomSampler(dataset)
     else:

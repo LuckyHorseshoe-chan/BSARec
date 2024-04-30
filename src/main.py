@@ -27,12 +27,20 @@ def main():
     args.item_size = train_max_item + 1
     args.num_users = num_users + 1
     train_dataloader = get_dataloder(args, train_seq_dic, 'train')
+    logger.info('train')
+    for seq in train_seq_dic:
+        if len(seq) == 0:
+            logger.info('zero')
 
     args.data_file = args.data_dir + 'val_' + args.data_name + '.txt'
     val_seq_dic, max_item, num_users = get_seq_dic(args)
     args.item_size = max_item + 1
     args.num_users = num_users + 1
     eval_dataloader = get_dataloder(args, val_seq_dic, 'val')
+    logger.info('val')
+    for seq in val_seq_dic:
+        if len(seq) == 0:
+            logger.info('zero')
 
     args.data_file = args.data_dir + 'test_' + args.data_name + '.txt'
     test_seq_dic, max_item, num_users = get_seq_dic(args)
@@ -40,6 +48,9 @@ def main():
     args.num_users = num_users + 1
     test_dataloader = get_dataloder(args, test_seq_dic, 'test')
     logger.info('test')
+    for seq in test_seq_dic:
+        if len(seq) == 0:
+            logger.info('zero')
 
     logger.info(str(args))
     logger.info(args.data_file)
