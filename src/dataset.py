@@ -7,7 +7,7 @@ from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampl
 import random
 
 class RecDataset(Dataset):
-    def __init__(self, args, user_seq, test_neg_items=None, data_type='train'):
+    def __init__(self, args, users, user_seq, test_neg_items=None, data_type='train'):
         self.args = args
         self.user_seq = []
         self.max_len = args.max_seq_length
@@ -16,8 +16,7 @@ class RecDataset(Dataset):
         self.data_type = data_type
 
         self.user_seq = user_seq
-        if self.data_type=='train':
-            self.user_ids = list(range(len(user_seq)))
+        self.user_ids = users
 
 
         self.test_neg_items = test_neg_items
@@ -189,6 +188,7 @@ def get_user_seqs_and_max_item(data_file):
 
 def get_user_seqs(data_file):
     lines = open(data_file).readlines()
+    users = []
     user_seq = []
     item_set = set()
     for line in lines:
@@ -196,21 +196,22 @@ def get_user_seqs(data_file):
         items = items.split(' ')
         items = [int(item) for item in items]
         user_seq.append(items)
+        users.append(user)
         item_set = item_set | set(items)
     max_item = max(item_set)
     num_users = len(lines)
 
-    return user_seq, max_item, num_users
+    return users, user_seq, max_item, num_users
 
 def get_seq_dic(args):
-    user_seq, max_item, num_users = get_user_seqs(args.data_file)
-    seq_dic = {'user_seq':user_seq, 'num_users':num_users }
+    users, user_seq, max_item, num_users = get_user_seqs(args.data_file)
+    seq_dic = {'users': users, 'user_seq': user_seq, 'num_users': num_users }
 
     return seq_dic, max_item, num_users
 
 def get_dataloder(args, seq_dic, data_type):
 
-    dataset = RecDataset(args, seq_dic['user_seq'], data_type=data_type)
+    dataset = RecDataset(args, seq_dic['users'], seq_dic['user_seq'], data_type=data_type)
         
     if data_type == 'train':
         sampler = RandomSampler(dataset)
