@@ -89,7 +89,9 @@ class Trainer:
             self.model.train()
             rec_loss = 0.0
 
+            self.logger.info("for  i, batch in rec_data_iter")
             for i, batch in rec_data_iter:
+                self.logger.info("Batch: {i}")
                 # 0. batch_data will be sent into the device(GPU or CPU)
                 batch = tuple(t.to(self.device) for t in batch)
 
