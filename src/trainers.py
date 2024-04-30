@@ -77,15 +77,16 @@ class Trainer:
         return [recall[0], ndcg[0], recall[1], ndcg[1], recall[3], ndcg[3]], str(post_fix)
 
     def iteration(self, epoch, dataloader, train=True):
-
+        self.logger.info("iteration")
         str_code = "train" if train else "test"
         # Setting the tqdm progress bar
         rec_data_iter = tqdm.tqdm(enumerate(dataloader),
                                   desc="Mode_%s:%d" % (str_code, epoch),
                                   total=len(dataloader),
                                   bar_format="{l_bar}{r_bar}")
-        
+        self.logger.info("rec_data_iter")
         if train:
+            self.logger.info("if train")
             self.model.train()
             rec_loss = 0.0
 
