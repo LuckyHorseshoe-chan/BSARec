@@ -9,14 +9,12 @@ import random
 class RecDataset(Dataset):
     def __init__(self, args, users, user_seq, test_neg_items=None, data_type='train'):
         self.args = args
-        self.user_seq = []
         self.max_len = args.max_seq_length
-        self.user_ids = []
         self.contrastive_learning = args.model_type.lower() in ['fearec', 'duorec']
         self.data_type = data_type
 
         self.user_seq = user_seq
-        self.user_ids = users
+        self.user_ids = [int(user) for user in users]
 
 
         self.test_neg_items = test_neg_items
