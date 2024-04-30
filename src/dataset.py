@@ -17,7 +17,7 @@ class RecDataset(Dataset):
 
         if self.data_type=='train':
             for user, seq in enumerate(user_seq):
-                input_ids = seq[-(self.max_len + 1):-1]
+                input_ids = seq[-(self.max_len + 2):-2]
                 self.user_seq.append(input_ids)
                 self.user_ids.append(user)
         else:
