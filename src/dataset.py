@@ -14,7 +14,7 @@ class RecDataset(Dataset):
         self.data_type = data_type
 
         self.user_seq = user_seq
-        self.user_ids = [int(user) for user in users]
+        self.user_ids = users
 
 
         self.test_neg_items = test_neg_items
@@ -155,9 +155,9 @@ def get_rating_matrix(data_name, seq_dic, max_item):
     row = []
     col = []
     data = []
-    for user_id, item_list in enumerate(seq_dic['user_seq']):
-        for item in item_list: #
-            row.append(user_id)
+    for i, item_list in enumerate(seq_dic['user_seq']):
+        for item in item_list: 
+            row.append(seq_dic['users'][i])
             col.append(item)
             data.append(1)
 

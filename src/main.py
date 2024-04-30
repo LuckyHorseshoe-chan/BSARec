@@ -59,13 +59,10 @@ def main():
             scores, result_info = trainer.test(0)
 
     else:
-        logger.info('training')
         early_stopping = EarlyStopping(args.checkpoint_path, logger=logger, patience=args.patience, verbose=True)
         for epoch in range(args.epochs):
 
-            logger.info(f'Epoch: {epoch}')
             # trainer.train(epoch)
-            # logger.info(f'train works')
             scores, _ = trainer.valid(epoch)
             # evaluate on MRR
             early_stopping(np.array(scores[-1:]), trainer.model)
