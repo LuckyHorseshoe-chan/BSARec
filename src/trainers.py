@@ -33,11 +33,11 @@ class Trainer:
         self.iteration(epoch, self.train_dataloader, train=True)
 
     def valid(self, epoch):
-        self.args.train_matrix = self.args.valid_rating_matrix
+        # self.args.train_matrix = self.args.valid_rating_matrix
         return self.iteration(epoch, self.eval_dataloader, train=False)
 
     def test(self, epoch):
-        self.args.train_matrix = self.args.test_rating_matrix
+        # self.args.train_matrix = self.args.test_rating_matrix
         return self.iteration(epoch, self.test_dataloader, train=False)
 
     def save(self, file_name):
