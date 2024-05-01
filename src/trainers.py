@@ -122,11 +122,11 @@ class Trainer:
                 rating_pred = rating_pred.cpu().data.numpy().copy()
                 batch_user_index = user_ids.cpu().numpy()
                 
-                try:
-                    rating_pred[self.args.train_matrix[batch_user_index].toarray() > 0] = 0
-                except: # bert4rec
-                    rating_pred = rating_pred[:, :-1]
-                    rating_pred[self.args.train_matrix[batch_user_index].toarray() > 0] = 0
+                # try:
+                #     rating_pred[self.args.train_matrix[batch_user_index].toarray() > 0] = 0
+                # except: # bert4rec
+                #     rating_pred = rating_pred[:, :-1]
+                #     rating_pred[self.args.train_matrix[batch_user_index].toarray() > 0] = 0
 
                 # reference: https://stackoverflow.com/a/23734295, https://stackoverflow.com/a/20104162
                 # argpartition time complexity O(n)  argsort O(nlogn)

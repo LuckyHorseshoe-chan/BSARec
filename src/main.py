@@ -46,7 +46,7 @@ def main():
     logger.info(model)
     trainer = Trainer(model, train_dataloader, eval_dataloader, test_dataloader, args, logger)
 
-    args.valid_rating_matrix, args.test_rating_matrix = get_rating_matrix(args.data_name, val_seq_dic, train_max_item), get_rating_matrix(args.data_name, test_seq_dic, train_max_item)
+    # args.valid_rating_matrix, args.test_rating_matrix = get_rating_matrix(args.data_name, val_seq_dic, train_max_item), get_rating_matrix(args.data_name, test_seq_dic, train_max_item)
 
     if args.do_eval:
         if args.load_model is None:
