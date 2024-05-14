@@ -120,7 +120,7 @@ class Trainer:
                 
                 rating_pred = self.predict_full(recommend_output)
                 rating_pred = rating_pred.cpu().data.numpy().copy()
-                batch_user_index = user_ids.cpu().numpy()
+                # batch_user_index = user_ids.cpu().numpy()
                 
                 # try:
                 #     rating_pred[self.args.train_matrix[batch_user_index].toarray() > 0] = 0
